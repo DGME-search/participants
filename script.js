@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     logo.addEventListener('click', () => {
         searchInput.value = ''; // 검색창 비우기
         resultsDiv.innerHTML = ''; // 검색 결과 지우기
+        location.reload(); // 페이지 새로고침
     });
 
     });
