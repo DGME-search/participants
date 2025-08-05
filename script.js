@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>남편:</strong> ${row[9] || ''}</p>
                     <p><strong>아내:</strong> ${row[11] || ''}</p>
                     <p><strong>연도:</strong> ${row[1] || ''}</p>
-                    <p><strong>차수:</strong> ${row[3] || ''}</p>
+                    <p><strong>차수:</strong> ${row[6] || ''}</p>
                     <p><strong>기간:</strong> ${row[4] || ''}</p>
                     <p><strong>본당:</strong> ${row[8] || ''}</p>
                 `;
