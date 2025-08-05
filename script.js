@@ -72,8 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 continue; 
             }
 
-            const husbandName = (row[9] || '').toLowerCase(); // 남편 이름 (인덱스 5)
-            const wifeName = (row[11] || '').toLowerCase();    // 아내 이름 (인덱스 6)
+            const husbandName = (row[5] || '').toLowerCase(); // 남편 이름 (인덱스 5)
+            const wifeName = (row[6] || '').toLowerCase();    // 아내 이름 (인덱스 6)
             console.log(`Row ${i} - Husband: ${husbandName}, Wife: ${wifeName}`);
 
             if (husbandName.includes(lowerCaseQuery) || wifeName.includes(lowerCaseQuery)) {
@@ -82,12 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const resultItem = document.createElement('div');
                 resultItem.className = 'result-item';
                 resultItem.innerHTML = `
-                    <p><strong>남편:</strong> ${row[9] || ''}</p>
-                    <p><strong>아내:</strong> ${row[11] || ''}</p>
-                    <p><strong>연도:</strong> ${row[1] || ''}</p>
+                    <p><strong>남편:</strong> ${row[5] || ''}</p>
+                    <p><strong>아내:</strong> ${row[6] || ''}</p>
+                    <p><strong>연도:</strong> ${row[0] || ''}</p>
                     <p><strong>차수:</strong> ${row[3] || ''}</p>
-                    <p><strong>기간:</strong> ${row[4] || ''}</p>
-                    <p><strong>본당:</strong> ${row[8] || ''}</p>
+                    <p><strong>기간:</strong> ${row[2] || ''}</p>
+                    <p><strong>본당:</strong> ${row[4] || ''}</p>
                 `;
                 resultsDiv.appendChild(resultItem);
             }
