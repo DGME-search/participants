@@ -12,32 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // CSV 데이터를 파싱하는 함수
     function parseCSV(text) {
         const lines = text.trim().split('\n');
-        if (lines.length === 0) return { columnIndices: {}, data: [] };
-
-        const headerLine = lines[0];
-        const rawHeaderCells = headerLine.split(',').map(cell => cell.trim().replace(/^"|"$/g, '').trim());
-
-        const columnIndices = {};
-        // Find the indices of the relevant columns in the header
-        columnIndices['연도'] = rawHeaderCells.indexOf('연도');
-        columnIndices['차수'] = rawHeaderCells.indexOf('차수');
-        columnIndices['기간'] = rawHeaderCells.indexOf('ME 주말 날짜'); // Map 'ME 주말 날짜' to '기간'
-        columnIndices['본당'] = rawHeaderCells.indexOf('본당');
-        columnIndices['남편 이름'] = rawHeaderCells.indexOf('남편 이름');
-        columnIndices['아내 이름'] = rawHeaderCells.indexOf('아내 이름');
-
-        // Filter out -1 indices (columns not found) and log warnings
-        for (const key in columnIndices) {
-            if (columnIndices[key] === -1) {
-                console.warn(`CSV header column "${key}" not found. Data for this field might be missing.`);
-            }
-        }
-
-        const dataRows = lines.slice(1).map(line => {
-            return line.split(',').map(cell => cell.trim().replace(/^"|"$/g, '').trim());
-        });
-
-        return { columnIndices, data: dataRows };
+        return lines.map(line =>
+            line.split(',').map(cell =>
+                cell.trim().replace(/^"|"$/g, '').trim()
+            )
+        );
     }
 
     // 검색 및 결과 표시 함수 (데이터 로드 포함)
@@ -62,12 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const csvText = await response.text();
             console.log('Raw CSV Text (first 500 chars):', csvText.substring(0, 500));
             console.log("CSV 데이터 로드 성공.");
-            const { columnIndices, data: rows } = parseCSV(csvText);
+            const rows = parseCSV(csvText); // No columnIndices returned
             console.log('Parsed Rows (first 5 rows):', rows.slice(0, 5));
-            console.log('Column Indices:', columnIndices);
             console.log(`총 ${rows.length}개의 행이 파싱되었습니다.`);
 
-            displayResults(rows, query, columnIndices); // columnIndices 전달
+            displayResults(rows, query); // No columnIndices passed
 
         } catch (error) {
             console.error('데이터 로딩 또는 파싱 오류:', error);
@@ -78,37 +56,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 결과 표시 함수 (필터링 및 HTML 생성)
-    function displayResults(rows, query, columnIndices) { // columnIndices 받기
+    function displayResults(rows, query) { // columnIndices 받지 않음
         let found = false;
         const lowerCaseQuery = query.toLowerCase(); // 검색어를 소문자로 변경
         console.log('DisplayResults - Search Term:', lowerCaseQuery);
 
-        // Check if essential columns are found
-        const husbandNameCol = columnIndices['남편 이름'];
-        const wifeNameCol = columnIndices['아내 이름'];
-        const yearCol = columnIndices['연도'];
-        const sessionCol = columnIndices['차수'];
-        const periodCol = columnIndices['기간'];
-        const parishCol = columnIndices['본당'];
-
-        if (husbandNameCol === -1 || wifeNameCol === -1) {
-            resultsDiv.innerHTML = '<p>필수 열(남편 이름, 아내 이름)을 CSV에서 찾을 수 없습니다. 스프레드시트 헤더를 확인하세요.</p>';
-            return;
-        }
-
-        // Loop through data rows (header already removed by parseCSV)
-        for (let i = 0; i < rows.length; i++) {
+        // 첫 번째 행(헤더)은 건너뛰고 검색 (i=1부터 시작)
+        for (let i = 1; i < rows.length; i++) {
             const row = rows[i];
 
-            // Check if the row has enough columns for the essential fields
-            const maxEssentialIndex = Math.max(husbandNameCol, wifeNameCol);
-            if (row.length <= maxEssentialIndex) {
-                console.log(`Skipping row ${i} due to insufficient length for essential fields:`, row);
+            // 데이터 행의 길이가 충분한지 확인 (최소한 필요한 모든 열이 있어야 함)
+            if (row.length < 40) { // 인덱스 39까지 필요
+                console.log(`Skipping row ${i} due to insufficient length:`, row);
                 continue; 
             }
 
-            const husbandName = (row[husbandNameCol] || '').toLowerCase();
-            const wifeName = (row[wifeNameCol] || '').toLowerCase();
+            const husbandName = (row[38] || '').toLowerCase(); // 남편 이름 (인덱스 38)
+            const wifeName = (row[39] || '').toLowerCase();    // 아내 이름 (인덱스 39)
             console.log(`Row ${i} - Husband: ${husbandName}, Wife: ${wifeName}`);
 
             if (husbandName.includes(lowerCaseQuery) || wifeName.includes(lowerCaseQuery)) {
@@ -117,12 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const resultItem = document.createElement('div');
                 resultItem.className = 'result-item';
                 resultItem.innerHTML = `
-                    <p><strong>남편:</strong> ${row[husbandNameCol] || ''}</p>
-                    <p><strong>아내:</strong> ${row[wifeNameCol] || ''}</p>
-                    <p><strong>연도:</strong> ${yearCol !== -1 ? (row[yearCol] || '') : 'N/A'}</p>
-                    <p><strong>차수:</strong> ${sessionCol !== -1 ? (row[sessionCol] || '') : 'N/A'}</p>
-                    <p><strong>기간:</strong> ${periodCol !== -1 ? (row[periodCol] || '') : 'N/A'}</p>
-                    <p><strong>본당:</strong> ${parishCol !== -1 ? (row[parishCol] || '') : 'N/A'}</p>
+                    <p><strong>남편:</strong> ${row[38] || ''}</p>
+                    <p><strong>아내:</strong> ${row[39] || ''}</p>
+                    <p><strong>연도:</strong> ${row[33] || ''}</p>
+                    <p><strong>차수:</strong> ${row[36] || ''}</p>
+                    <p><strong>기간:</strong> ${row[35] || ''}</p>
+                    <p><strong>본당:</strong> ${row[37] || ''}</p>
                 `;
                 resultsDiv.appendChild(resultItem);
             }
