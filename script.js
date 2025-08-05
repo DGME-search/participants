@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const logo = document.getElementById('logo');
     const searchButton = document.getElementById('searchButton');
     const searchInput = document.getElementById('searchInput');
     const resultsDiv = document.getElementById('results');
@@ -92,6 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.key === 'Enter') {
             performSearch();
         }
+    });
+
+    // 로고 클릭 시 초기화
+    logo.addEventListener('click', () => {
+        searchInput.value = ''; // 검색창 비우기
+        resultsDiv.innerHTML = ''; // 검색 결과 지우기
     });
 
     // 페이지 로드 시 데이터 불러오기
