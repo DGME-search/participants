@@ -1,0 +1,112 @@
+/* 기본 스타일 */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+/* 헤더 스타일 */
+header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#logo {
+    height: 100px;
+    width: 130px;
+    margin-right: 20px;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.8em; /* PC 화면용 글자 크기 */
+}
+
+.search-wrapper {
+    display: flex;
+    margin-top: 10px;
+}
+
+#searchInput {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    flex-grow: 1; /* 검색창이 남은 공간을 모두 차지하도록 설정 */
+}
+
+#searchButton {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* 검색 결과 스타일 */
+#results {
+    margin-top: 20px;
+}
+
+.result-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.result-item p {
+    margin: 5px 0;
+    font-size: 1.1em; /* 휴대폰에서 잘 보이도록 글자 크기 조정 */
+}
+
+/* 로딩 메시지 스타일 */
+#loading {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2em;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #logo {
+        margin-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 1.5em; /* 휴대폰 화면용 글자 크기 */
+    }
+
+    .search-wrapper {
+        flex-direction: column;
+    }
+
+    #searchInput {
+        width: calc(100% - 22px); /* padding 고려 */
+        margin-bottom: 10px;
+    }
+
+    #searchButton {
+        width: 100%;
+        margin-left: 0;
+    }
+}

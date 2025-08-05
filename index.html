@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대구ME 참가부부 검색</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="대구ME 로고" id="logo">
+        <div class="title-container">
+            <h1>대구ME 참가부부 검색</h1>
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="이름을 입력하세요...">
+                <button id="searchButton">검색</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="results">
+            <!-- 검색 결과가 여기에 표시됩니다 -->
+        </div>
+        <div id="loading" style="display: none;">
+            <p>데이터를 불러오는 중입니다...</p>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
