@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>연도:</strong> ${row[0] || ''}</p>
                     <p><strong>차수:</strong> ${row[2] || ''}</p>
                     <p><strong>기간:</strong> ${row[7] || ''}</p>
-                    <p><strong>본당:</strong> ${row[6] || ''}</p>
+                    <p><strong>본당:</strong> ${row[9] || ''}</p>
                 `;
                 resultsDiv.appendChild(resultItem);
             }
