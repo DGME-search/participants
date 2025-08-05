@@ -72,8 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 continue; 
             }
 
-            const husbandName = (row[5] || '').toLowerCase(); // 남편 이름 (인덱스 5)
-            const wifeName = (row[6] || '').toLowerCase();    // 아내 이름 (인덱스 6)
+            const husbandName = (row[9] || '').toLowerCase(); // 남편 이름 (인덱스 5)
+            const wifeName = (row[11] || '').toLowerCase();    // 아내 이름 (인덱스 6)
             console.log(`Row ${i} - Husband: ${husbandName}, Wife: ${wifeName}`);
 
             if (husbandName.includes(lowerCaseQuery) || wifeName.includes(lowerCaseQuery)) {
