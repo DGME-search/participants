@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. 구글 스프레드시트에서 '파일' > '공유' > '웹에 게시'를 선택합니다.
     // 2. '전체 문서'를 'CSV(쉼표로 구분된 값)' 형식으로 게시합니다.
     // 3. 생성된 URL을 아래에 붙여넣으세요.
-    const WEB_PUBLISHED_URL = 'YOUR_WEB_PUBLISHED_URL';
+    const WEB_PUBLISHED_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRsbSBEIpAUVChiBI6qs14orYM2fUiRoarUzeYlml765V1sfEEJSt2hl-aiQoJCeJw6Sjg3LQwf2p56/pub?gid=1039371593&single=true&output=csv';
 
     let sheetData = [];
 
