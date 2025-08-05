@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function parseCSV(text) {
         const lines = text.trim().split('\n');
         // 첫 번째 행은 헤더이므로 건너뛰고 실제 데이터 행만 반환합니다.
-        return lines.slice(1).map(line =>
+        return lines.slice(4).map(line =>
             line.split(',').map(cell =>
                 cell.trim().replace(/^"|"$/g, '').trim()
             )
@@ -63,17 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('DisplayResults - Search Term:', lowerCaseQuery);
 
         // 첫 번째 행(헤더)은 건너뛰고 검색 (i=1부터 시작)
-        for (let i = 1; i < rows.length; i++) {
+        for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
 
             // 데이터 행의 길이가 충분한지 확인 (최소한 필요한 모든 열이 있어야 함)
-            if (row.length < 7) { // 인덱스 6까지 필요
+            if (row.length < 11) { // 인덱스 10까지 필요
                 console.log(`Skipping row ${i} due to insufficient length:`, row);
                 continue; 
             }
 
-            const husbandName = (row[5] || '').toLowerCase(); // 남편 이름 (인덱스 5)
-            const wifeName = (row[6] || '').toLowerCase();    // 아내 이름 (인덱스 6)
+            const husbandName = (row[9] || '').toLowerCase(); // 남편 이름 (인덱스 9)
+            const wifeName = (row[10] || '').toLowerCase();    // 아내 이름 (인덱스 10)
             console.log(`Row ${i} - Husband: ${husbandName}, Wife: ${wifeName}`);
 
             if (husbandName.includes(lowerCaseQuery) || wifeName.includes(lowerCaseQuery)) {
@@ -82,12 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const resultItem = document.createElement('div');
                 resultItem.className = 'result-item';
                 resultItem.innerHTML = `
-                    <p><strong>남편:</strong> ${row[5] || ''}</p>
-                    <p><strong>아내:</strong> ${row[6] || ''}</p>
-                    <p><strong>연도:</strong> ${row[0] || ''}</p>
-                    <p><strong>차수:</strong> ${row[3] || ''}</p>
-                    <p><strong>기간:</strong> ${row[2] || ''}</p>
-                    <p><strong>본당:</strong> ${row[4] || ''}</p>
+                    <p><strong>남편:</strong> ${row[9] || ''}</p>
+                    <p><strong>아내:</strong> ${row[10] || ''}</p>
+                    <p><strong>연도:</strong> ${row[4] || ''}</p>
+                    <p><strong>차수:</strong> ${row[7] || ''}</p>
+                    <p><strong>기간:</strong> ${row[6] || ''}</p>
+                    <p><strong>본당:</strong> ${row[8] || ''}</p>
                 `;
                 resultsDiv.appendChild(resultItem);
             }
