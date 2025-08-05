@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadingDiv = document.getElementById('loading');
 
     // 사용자가 제공한 '웹에 게시' URL
-    // CORS 문제를 우회하기 위해 프록시 서버를 사용합니다.
-    const SPREADSHEET_URL = `https://api.allorigins.win/raw?url=${encodeURIComponent('https://docs.google.com/spreadsheets/d/e/2PACX-1vRsbSBEIpAUVChiBI6qs14orYM2fUiRoarUzeYlml765V1sfEEJSt2hl-aiQoJCeJw6Sjg3LQwf2p56/pub?gid=1039371593&single=true&output=csv')}`;
+    // CORS 문제를 우회하기 위해 프록시 서버를 사용하지 않고 직접 접근을 시도합니다.
+    const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRsbSBEIpAUVChiBI6qs14orYM2fUiRoarUzeYlml765V1sfEEJSt2hl-aiQoJCeJw6Sjg3LQwf2p56/pub?gid=1039371593&single=true&output=csv';
 
     // CSV 데이터를 파싱하는 함수
     function parseCSV(text) {
