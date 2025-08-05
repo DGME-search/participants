@@ -33,7 +33,6 @@ h1 {
 
 .search-wrapper {
     display: flex;
-    flex-grow: 1; /* 검색창이 남은 공간을 최대한 차지하도록 설정 */
 }
 
 #searchInput {
@@ -41,7 +40,7 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
-    flex-grow: 1; /* 검색창이 남은 공간을 모두 차지하도록 설정 */
+    width: 30vw; /* 화면 너비의 30%로 설정 */
 }
 
 #searchButton {
