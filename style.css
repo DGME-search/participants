@@ -19,19 +19,21 @@ header {
     margin-right: 20px;
 }
 
-.title-container {
+.title-search-container {
     display: flex;
-    flex-direction: column;
+    align-items: center; /* 세로 중앙 정렬 */
+    flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
 }
 
 h1 {
     margin: 0;
     font-size: 1.8em; /* PC 화면용 글자 크기 */
+    margin-right: 20px; /* 제목과 검색창 사이 간격 */
 }
 
 .search-wrapper {
     display: flex;
-    margin-top: 10px;
+    flex-grow: 1; /* 검색창이 남은 공간을 최대한 차지하도록 설정 */
 }
 
 #searchInput {
