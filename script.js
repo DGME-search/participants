@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // CSV 데이터를 파싱하는 함수
     function parseCSV(text) {
         const lines = text.trim().split('\n');
-        return lines.map(line =>
+        // 첫 번째 행은 헤더이므로 건너뛰고 실제 데이터 행만 반환합니다.
+        return lines.slice(1).map(line =>
             line.split(',').map(cell =>
                 cell.trim().replace(/^"|"$/g, '').trim()
             )
