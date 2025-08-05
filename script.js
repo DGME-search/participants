@@ -41,11 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const csvText = await response.text();
             console.log('Raw CSV Text (first 500 chars):', csvText.substring(0, 500));
             console.log("CSV 데이터 로드 성공.");
-            const rows = parseCSV(csvText); // No columnIndices returned
+            const rows = parseCSV(csvText);
             console.log('Parsed Rows (first 5 rows):', rows.slice(0, 5));
             console.log(`총 ${rows.length}개의 행이 파싱되었습니다.`);
 
-            displayResults(rows, query); // No columnIndices passed
+            displayResults(rows, query); // columnIndices 전달하지 않음
 
         } catch (error) {
             console.error('데이터 로딩 또는 파싱 오류:', error);
@@ -66,13 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const row = rows[i];
 
             // 데이터 행의 길이가 충분한지 확인 (최소한 필요한 모든 열이 있어야 함)
-            if (row.length < 40) { // 인덱스 39까지 필요
+            if (row.length < 7) { // 인덱스 6까지 필요
                 console.log(`Skipping row ${i} due to insufficient length:`, row);
                 continue; 
             }
 
-            const husbandName = (row[38] || '').toLowerCase(); // 남편 이름 (인덱스 38)
-            const wifeName = (row[39] || '').toLowerCase();    // 아내 이름 (인덱스 39)
+            const husbandName = (row[5] || '').toLowerCase(); // 남편 이름 (인덱스 5)
+            const wifeName = (row[6] || '').toLowerCase();    // 아내 이름 (인덱스 6)
             console.log(`Row ${i} - Husband: ${husbandName}, Wife: ${wifeName}`);
 
             if (husbandName.includes(lowerCaseQuery) || wifeName.includes(lowerCaseQuery)) {
@@ -81,12 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const resultItem = document.createElement('div');
                 resultItem.className = 'result-item';
                 resultItem.innerHTML = `
-                    <p><strong>남편:</strong> ${row[38] || ''}</p>
-                    <p><strong>아내:</strong> ${row[39] || ''}</p>
-                    <p><strong>연도:</strong> ${row[33] || ''}</p>
-                    <p><strong>차수:</strong> ${row[36] || ''}</p>
-                    <p><strong>기간:</strong> ${row[35] || ''}</p>
-                    <p><strong>본당:</strong> ${row[37] || ''}</p>
+                    <p><strong>남편:</strong> ${row[5] || ''}</p>
+                    <p><strong>아내:</strong> ${row[6] || ''}</p>
+                    <p><strong>연도:</strong> ${row[0] || ''}</p>
+                    <p><strong>차수:</strong> ${row[3] || ''}</p>
+                    <p><strong>기간:</strong> ${row[2] || ''}</p>
+                    <p><strong>본당:</strong> ${row[4] || ''}</p>
                 `;
                 resultsDiv.appendChild(resultItem);
             }
