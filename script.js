@@ -1,4 +1,4 @@
- 1 document.addEventListener('DOMContentLoaded', () => {                                      │
+ │      1 document.addEventListener('DOMContentLoaded', () => {                                      │
  │      2     const searchInput = document.getElementById('searchInput');                            │
  │      3     const resultsContainer = document.getElementById('resultsContainer');                  │
  │      4                                                                                            │
@@ -101,4 +101,4 @@
  │     97     // 페이지 로드 시 데이터 불러오기                                                      │
  │     98     loadData();                                                                            │
  │     99 });                                                                                        │
- │    100 });                                          
+ │    100 }); 
