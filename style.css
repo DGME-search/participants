@@ -14,58 +14,126 @@ header {
     align-items: center;
     border-bottom: 1px solid #ddd;
     flex-wrap: wrap;
+}
 
-    .logo {
-        height: 100px;
-        width: 130px;
-        object-fit: contain;
-    }
+.logo {
+    height: 100px;
+    width: 130px;
+    object-fit: contain;
+}
 
-    .search-container {
-        display: flex;
-        align-items: center;
-        flex-grow: 1;
-        margin-left: 20px;
-        flex-wrap: wrap;
+.search-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin-left: 20px;
+    flex-wrap: wrap;
+}
 
-        .site-title {
-            font-size: 1.5em;
-            margin: 0 20px 0 0;
-            white-space: nowrap; /* PC에서는 줄바꿈 방지 */
-        }
+.site-title {
+    font-size: 1.5em;
+    margin: 0 20px 0 0;
+    white-space: nowrap; /* PC에서는 줄바꿈 방지 */
+}
 
-        .mobile-break {
-            display: none; /* PC에서는 줄바꿈 요소 숨김 */
-        }
+.mobile-break {
+    display: none; /* PC에서는 줄바꿈 요소 숨김 */
+}
 
-        #searchInput {
-            font-size: 1.1em;
-            padding: 10px 15px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            flex-grow: 1;
-            min-width: 180px;
-            margin-right: 10px;
-        }
+#searchInput {
+    font-size: 1.1em;
+    padding: 10px 15px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+    min-width: 180px;
+    margin-right: 10px;
+}
 
-        #searchButton {
-            font-size: 1.1em;
-            padding: 10px 20px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+#searchButton {
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-            &:hover {
-                background-color: #0056b3;
-            }
-        }
-    }
+#searchButton:hover {
+    background-color: #0056b3;
 }
 
 main {
     padding: 20px;
+}
 
-    #resultsContainer {
+#resultsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.result-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-size: 1.1rem;
+}
+
+.result-item p {
+    margin: 12px 0;
+    line-height: 1.6;
+}
+
+.result-item strong {
+    display: inline-block;
+    font-weight: 600;
+    color: #005a9c;
+}
+
+.no-results, #loadingIndicator {
+    font-size: 1.2em;
+    color: #777;
+    text-align: center;
+    width: 100%;
+    padding: 40px 0;
+}
+
+/* 모바일 화면을 위한 미디어 쿼리 */
+@media (max-width: 768px) {
+    .search-container {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 0;
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .site-title {
+        white-space: normal; /* 모바일에서는 줄바꿈 허용 */
+        margin-bottom: 10px;
+        font-size: 1.3em;
+    }
+
+    .mobile-break {
+        display: block; /* 모바일에서 줄바꿈 요소 표시 */
+    }
+
+    #searchInput, #searchButton {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #searchInput {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .result-item {
+        font-size: 1.2rem;
+    }
+}
